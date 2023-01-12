@@ -1,8 +1,5 @@
 Rails.application.routes.draw do
-  get 'notices/index'
-  get 'notices/new'
-  get 'notices/create'
-  get 'notices/show'
+  resources :notices, only: [:index, :new, :create, :show, :destroy]
   resources :dashboard, only: :index
   root 'employees#index'
 
