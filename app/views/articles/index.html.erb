@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="col-12 mt-5">
+  <%= link_to "新規追加", new_article_path, class: "btn btn-primary my-3 me-3 float-end" %>
+  <table class="table table-striped">
+    <thead class="p-2">
+      <tr>
+        <th class="p-3 fs-5" colspan="2"><p>タイトル</p></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="width: 80%">
+          <div class="d-flex align-items-center">
+            <p class="me-4">記事XXX</p>
+            <p>公開日</p>
+          </div>
+        </td>
+        <td>
+          <div class="d-flex justify-content-around">
+            <button type="button" class="btn btn-secondary btn-sm">編集</button>
+            <button type="button" class="btn btn-danger btn-sm">削除</button>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+</div>
