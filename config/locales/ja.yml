@@ -40,3 +40,6 @@ ja:
       article:
         title: タイトル
         content: 内容
+  time:
+    formats:
+      default: "%Y年%m月%d日"

@@ -1,9 +1,14 @@
 class ArticlesController < ApplicationController
+  before_action :set_employee,  only: %i(show)
+
   def index
+    @articles = Article.all
+    @employee = current_user.id
   end
 
   def new
     @article = Article.new
+    @employee = current_user
   end
 
   def create
@@ -25,5 +30,9 @@ class ArticlesController < ApplicationController
 
   def article_params
     params.require(:article).permit(:title, :content, :author)
+  end
+
+  def set_employee
+    @employee = Employee.find(params["employee_id"])
   end
 end
