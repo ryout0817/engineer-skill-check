@@ -1,2 +1,18 @@
-<h1>Notices#show</h1>
-<p>Find me in app/views/notices/show.html.erb</p>
+<div class="container d-block mt-5">
+  <div class="col-lg-8  mx-auto">
+    <h1 class="title article-title">お知らせ詳細</h1>
+    <div class="show-article-wrap p-5 bg-white">
+      <div class="d-flex justify-content-start align-items-center border-bottom border-2 pb-5">
+        <p class="col-2 mx-lg-5 fs-4 fw-bolder">タイトル</p>
+        <p class="col-lg-8 fs-5 p-3 border border-2 rounded"><%= @article.title %></p>
+      </div>
+      <div class="d-flex justify-content-start align-items-center mt-5">
+        <p class="col-2 mx-lg-5 fs-4 fw-bolder">内容</p>
+        <p class="col-lg-8 fs-5 p-3 border border-2 rounded"><%= @article.content %></p>
+      </div>
+      <div class="text-center">
+        <%= link_to "一覧ページへ戻る", articles_path, class: "my-5 btn bg-secondary text-light" %>
+      </div>
+    </div>
+  </div>
+</div>
