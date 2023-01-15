@@ -24,6 +24,9 @@ class ArticlesController < ApplicationController
   end
 
   def destroy
+    @article = Article.find(params[:id])
+    @article.destroy!
+    redirect_to articles_path, notice: "記事を削除しました。"
   end
 
   private
