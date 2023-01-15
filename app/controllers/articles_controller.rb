@@ -28,7 +28,13 @@ class ArticlesController < ApplicationController
   end
 
   def update
-
+    @article = Article.find(params[:id])
+    if @article.update(article_params)
+      @article.save
+      redirect_to articles_path
+    else
+      render :edit
+    end
   end
 
   def destroy
