@@ -1,0 +1,30 @@
+inherit_from: .rubocop_todo.yml
+
+require:
+  - rubocop-performance
+  - rubocop-rails
+
+AllCops:
+  SuggestExtensions: false
+  NewCops: enable
+  DisplayCopNames: true
+  # rubocop対象外(リポジトリ毎で調節)
+  Exclude:
+    - "Gemfile"
+    - "bin/**/*"
+    - "db/**/*"
+    - "log/**/*"
+    - "tmp/**/*"
+    - "vendor/**/*"
+    - "lib/tasks/auto_annotate_models.rake"
+    - "config/environments/*"
+    - "config/puma.rb"
+
+Metrics:
+  Enabled: false
+
+Layout/LineLength:
+  Enabled: false
+
+Rails/I18nLocaleTexts:
+  Enabled: false
