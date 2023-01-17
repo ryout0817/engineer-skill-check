@@ -20,7 +20,7 @@ class ArticlesController < ApplicationController
   def create
     @article = Article.new(article_params)
     if @article.save
-      redirect_to articles_path, notice: "プロフィールを登録しました。"
+      redirect_to articles_path, notice: "お知らせを登録しました。"
     else
       render :new
     end
@@ -39,7 +39,7 @@ class ArticlesController < ApplicationController
   def destroy
     @article = Article.find(params[:id])
     @article.destroy!
-    redirect_to articles_path, notice: "記事を削除しました。"
+    redirect_to articles_path, notice: "お知らせを削除しました。"
   end
 
   private
