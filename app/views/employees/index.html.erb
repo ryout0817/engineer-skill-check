@@ -37,4 +37,10 @@
     <% end %>
     </tbody>
   </table>
+  <div class="text-end mt-5">
+    <%= link_to employees_path(format: :csv), class: 'btn btn-success btn-lg' do %>
+      <i class="bi bi-file-earmark-arrow-down"></i>
+      <span>社員情報を出力する</span>
+    <% end %>
+  </div>
 </div>
