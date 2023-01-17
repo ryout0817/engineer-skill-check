@@ -19,6 +19,9 @@ class EmployeesController < ApplicationController
     @employee = Employee.new
   end
 
+  def edit
+  end
+
   def create
     @employee = Employee.new(employee_params)
     if @employee.save
@@ -26,9 +29,6 @@ class EmployeesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def edit
   end
 
   def update

@@ -4,9 +4,17 @@ class ArticlesController < ApplicationController
     @employee = current_user.id
   end
 
+  def show
+    @article = Article.find(params[:id])
+  end
+
   def new
     @article = Article.new
     @employee = current_user
+  end
+
+  def edit
+    @article = Article.find(params[:id])
   end
 
   def create
@@ -16,14 +24,6 @@ class ArticlesController < ApplicationController
     else
       render :new
     end
-  end
-
-  def show
-    @article = Article.find(params[:id])
-  end
-
-  def edit
-    @article = Article.find(params[:id])
   end
 
   def update
