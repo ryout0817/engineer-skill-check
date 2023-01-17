@@ -6,7 +6,7 @@ class Article < ApplicationRecord
   acts_as_paranoid
 
   def delete!
-    self.deleted_at = Time.now
+    self.deleted_at = Time.zone.now
     save!
   end
 end
