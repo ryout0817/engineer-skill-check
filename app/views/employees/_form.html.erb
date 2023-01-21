@@ -1,6 +1,6 @@
 <div class="employee_form">
   <% if employee.errors.present? %>
-    <ul>
+    <ul class="flash">
       <% employee.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>

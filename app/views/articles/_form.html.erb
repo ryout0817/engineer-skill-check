@@ -1,7 +1,7 @@
 <div class="container">
   <div class="employee_form">
     <% if @article.errors.present? %>
-      <ul>
+      <ul class="flash">
         <% @article.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>

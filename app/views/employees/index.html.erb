@@ -1,6 +1,6 @@
 <div class="employee_index">
   <% if flash.notice.present? %>
-    <p><%= flash.notice %></p>
+    <p class="flash"><%= flash.notice %></p>
   <% end %>
 
   <% if current_user.employee_info_manage_auth %>
