@@ -1,13 +1,11 @@
 <div class="container">
-  <div class="employee_form">
-    <% if @article.errors.present? %>
-      <ul class="flash">
-        <% @article.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    <% end %>
-  </div>
+  <% if @article.errors.present? %>
+    <ul class="flash">
+      <% @article.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+    </ul>
+  <% end %>
   <div class="col-10 mx-auto mt-5">
     <h2 class="title article-title mb-0">お知らせ</h2>
     <div class="new-article-wrap p-5"> 
