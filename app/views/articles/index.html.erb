@@ -9,7 +9,8 @@
     <table class="table bg-white border border-3 table-bordered table-hover">
       <thead class="p-2">
         <tr>
-          <th class="p-3 fs-5" colspan="2"><p>タイトル</p></th>
+          <th class="p-3 fs-5" colspan="2"><p>タイトル <%= link_to "新しい順", articles_path(latest: "true"), class:"sort-bottom" %><%= link_to "古い順", articles_path(old: "true"), class:"sort-bottom" %></p></th>
+          
         </tr>
       </thead>
       <tbody>

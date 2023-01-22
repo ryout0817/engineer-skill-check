@@ -1,6 +1,12 @@
 class ArticlesController < ApplicationController
   def index
-    @articles = Article.all.page(params[:page]).per(10)
+    @articles = if params[:latest]
+                  Article.latest.page(params[:page]).per(10)
+                elsif params[:old]
+                  Article.old.latest.page(params[:page]).per(10)
+                else
+                  Article.all.page(params[:page]).per(10)
+                end
     @employee = current_user.id
   end
 
