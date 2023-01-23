@@ -36,3 +36,6 @@ Style/StringLiterals:
 
 Style/FrozenStringLiteralComment:
   Enabled: false
+
+Documentation:
+  Enabled: false
