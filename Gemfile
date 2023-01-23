@@ -33,6 +33,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem "factory_bot_rails"
   gem 'faker'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -61,5 +62,3 @@ gem 'paranoia'
 gem 'acts_as_paranoid'
 
 gem 'kaminari'
-
-gem 'selenium-webdriver'
