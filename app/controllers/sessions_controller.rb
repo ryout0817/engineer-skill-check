@@ -27,6 +27,7 @@ class SessionsController < ApplicationController
   end
 
   private
+
   def check_params
     if employee_params[:account].blank?
       flash.now[:alert] = 'アカウントが入力されていません。'
