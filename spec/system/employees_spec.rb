@@ -6,7 +6,7 @@ RSpec.describe "Employees", type: :system do
   let!(:employee) { FactoryBot.create(:employee) }
 
   before do
-    visit login_path
+    visit root_path
     fill_in "employees[account]",	with: "yamada"
     fill_in "employees[password]", with: "hogehoge"
     click_button "ログイン"
