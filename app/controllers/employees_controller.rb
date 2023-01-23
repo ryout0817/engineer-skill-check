@@ -9,7 +9,7 @@ class EmployeesController < ApplicationController
 
     respond_to do |format|
       format.html
-      format.csv do |csv|
+      format.csv do
         send_employees_csv(@employees)
       end
     end
