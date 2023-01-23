@@ -2,18 +2,15 @@ class ProfilesController < ApplicationController
   before_action :set_employee
   before_action :set_profile, only: %i[show edit update]
 
-  def index
-  end
+  def index; end
 
-  def show
-  end
+  def show; end
 
   def new
     @profile = Profile.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @profile = Profile.new(profile_params)
