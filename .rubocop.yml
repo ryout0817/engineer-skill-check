@@ -8,7 +8,6 @@ AllCops:
   SuggestExtensions: false
   NewCops: enable
   DisplayCopNames: true
-  # rubocop対象外(リポジトリ毎で調節)
   Exclude:
     - "Gemfile"
     - "bin/**/*"
@@ -39,3 +38,7 @@ Style/FrozenStringLiteralComment:
 
 Documentation:
   Enabled: false
+
+Style/RedundantCondition:
+  Exclude:
+    - 'app/controllers/employees_controller.rb'
