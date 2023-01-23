@@ -31,3 +31,6 @@ Rails/I18nLocaleTexts:
 
 Style/StringLiterals:
   Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
