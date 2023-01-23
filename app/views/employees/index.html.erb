@@ -1,43 +1,47 @@
-<div class="employee_index">
+<div class="employee_index col-12">
   <% if flash.notice.present? %>
     <p class="flash"><%= flash.notice %></p>
   <% end %>
 
   <% if current_user.employee_info_manage_auth %>
-    <p class="new_employee"><%= link_to '新規追加', new_employee_path, class: 'btn btn-primary btn-lg mt-5' %></p>
+    <p class="new_employee"><%= link_to '新規追加', new_employee_path, class: 'btn btn-primary btn-lg my-5' %></p>
   <% end %>
 
-  <table class="employee_table bg-light">
-    <thead>
-      <tr>
-        <th><%= sort_order "number", "社員番号" %></th>
-        <th class="name">氏名</th>
-        <th class="department_th"><%= sort_order "department_id", "所属" %></th>
-      </tr>
-    </thead>
-    <tbody>
-    <% @employees.each do |employee| %>
-      <tr class="employee">
-        <% if employee.profiles.active.present? %>
-          <% if employee == current_user %>
-            <th><%= link_to employee.number, edit_employee_profile_path(employee, employee.profiles.active.first) %></th>
-          <% else %>
-            <th><%= link_to employee.number, employee_profile_path(employee, employee.profiles.active.first) %></th>
-          <% end %>
+  <table class="table mx-auto w-75 bg-light border border-3 table-bordered table-hover col-12">
+  <thead>
+    <tr>
+      <th scope="col"><%= sort_order "number", "社員番号" %></th>
+      <th scope="col-5">氏名</th>
+      <th class="department_th col-4 text-center"><%= sort_order "department_id", "所属" %></th>
+    </tr>
+  </thead>
+  <% @employees.each do |employee| %>
+  <tbody>
+    <tr>
+      <% if employee.profiles.active.present? %>
+        <% if employee == current_user %>
+          <th><%= link_to employee.number, edit_employee_profile_path(employee, employee.profiles.active.first) %></th>
         <% else %>
-          <th><%= link_to employee.number, employee_profiles_path(employee) %></th>
+          <th><%= link_to employee.number, employee_profile_path(employee, employee.profiles.active.first) %></th>
         <% end %>
-        <th class="name"><%= "#{employee.last_name} #{employee.first_name}" %></th>
-        <th><%= employee.department.name %></th>
-        <% if current_user.employee_info_manage_auth %>
-          <th class="btn_th"><%= link_to '編集', edit_employee_path(employee), class: 'btn btn-secondary' %></th>
-          <th class="btn_th"><%= link_to '削除', employee, method: :delete, data: { confirm: "社員「#{employee.first_name} #{employee.last_name}」を削除します。よろしいですか？" }, class: 'btn btn-danger' %></th>
-        <% end %>
-      </tr>
-    <% end %>
-    </tbody>
-  </table>
-  <div class="text-end mt-5">
+      <% else %>
+        <th><%= link_to employee.number, employee_profiles_path(employee) %></th>
+      <% end %>
+      <td class="col fw-bolder"><%= "#{employee.last_name} #{employee.first_name}" %></td>
+      <td class="col fw-bolder">
+        <div class="d-flex justify-content-around">
+          <%= employee.department.name %>
+          <% if current_user.employee_info_manage_auth %>
+            <%= link_to '編集', edit_employee_path(employee), class: 'btn btn-secondary btn-sm' %>
+            <%= link_to '削除', employee, method: :delete, data: { confirm: "社員「#{employee.first_name} #{employee.last_name}」を削除します。よろしいですか？" }, class: 'btn btn-danger btn-sm' %>
+          <% end %>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
+  <div class="csv-btn text-end mt-5">
     <%= link_to employees_path(format: :csv), class: 'btn btn-success btn-lg' do %>
       <i class="bi bi-file-earmark-arrow-down"></i>
       <span>社員情報を出力する</span>
