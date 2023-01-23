@@ -1,8 +1,8 @@
 require 'csv'
 
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i(edit update destroy)
-  before_action :set_form_option, only: %i(new create edit update)
+  before_action :set_employee, only: %i[edit update destroy]
+  before_action :set_form_option, only: %i[new create edit update]
 
   def index
     @employees = Employee.active.order("#{sort_column} #{sort_direction}")
@@ -74,7 +74,7 @@ class EmployeesController < ApplicationController
 
   def send_employees_csv(employees)
     csv_data = CSV.generate do |csv|
-      header = %w(社員番号 氏名 所属)
+      header = %w[社員番号 氏名 所属]
       csv << header
       employees.each do |e|
         values = [e.id, "#{e.last_name} #{e.first_name}", e.department.name]

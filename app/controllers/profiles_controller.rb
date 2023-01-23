@@ -1,6 +1,6 @@
 class ProfilesController < ApplicationController
   before_action :set_employee
-  before_action :set_profile, only: %i(show edit update)
+  before_action :set_profile, only: %i[show edit update]
 
   def index
   end
