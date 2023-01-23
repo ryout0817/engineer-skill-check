@@ -1,15 +1,15 @@
 require 'csv'
 
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i(edit update destroy)
-  before_action :set_form_option, only: %i(new create edit update)
+  before_action :set_employee, only: %i[edit update destroy]
+  before_action :set_form_option, only: %i[new create edit update]
 
   def index
     @employees = Employee.active.order("#{sort_column} #{sort_direction}")
 
     respond_to do |format|
       format.html
-      format.csv do |csv|
+      format.csv do
         send_employees_csv(@employees)
       end
     end
@@ -19,8 +19,7 @@ class EmployeesController < ApplicationController
     @employee = Employee.new
   end
 
-  def edit
-  end
+  def edit; end
 
   def create
     @employee = Employee.new(employee_params)
@@ -42,8 +41,8 @@ class EmployeesController < ApplicationController
   def destroy
     ActiveRecord::Base.transaction do
       now = Time.zone.now
-      @employee.update(:deleted_at, now)
-      @employee.profiles.active.first.update(:deleted_at, now) if @employee.profiles.active.present?
+      @employee.update_column(:deleted_at, now)  # rubocop:disable all
+      @employee.profiles.active.first.update_column(:deleted_at, now) if @employee.profiles.active.present?  # rubocop:disable all
     end
 
     redirect_to employees_url, notice: "社員「#{@employee.last_name} #{@employee.first_name}」を削除しました。"
@@ -74,7 +73,7 @@ class EmployeesController < ApplicationController
 
   def send_employees_csv(employees)
     csv_data = CSV.generate do |csv|
-      header = %w(社員番号 氏名 所属)
+      header = %w[社員番号 氏名 所属]
       csv << header
       employees.each do |e|
         values = [e.id, "#{e.last_name} #{e.first_name}", e.department.name]

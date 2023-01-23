@@ -8,7 +8,6 @@ AllCops:
   SuggestExtensions: false
   NewCops: enable
   DisplayCopNames: true
-  # rubocop対象外(リポジトリ毎で調節)
   Exclude:
     - "Gemfile"
     - "bin/**/*"
@@ -18,7 +17,9 @@ AllCops:
     - "vendor/**/*"
     - "lib/tasks/auto_annotate_models.rake"
     - "config/environments/*"
+    - "config/initializers/*"
     - "config/puma.rb"
+    - "spec/spec_helper.rb"
 
 Metrics:
   Enabled: false
@@ -28,3 +29,16 @@ Layout/LineLength:
 
 Rails/I18nLocaleTexts:
   Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Documentation:
+  Enabled: false
+
+Style/RedundantCondition:
+  Exclude:
+    - 'app/controllers/employees_controller.rb'

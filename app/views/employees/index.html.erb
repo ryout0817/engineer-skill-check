@@ -1,13 +1,13 @@
 <div class="employee_index">
   <% if flash.notice.present? %>
-    <p><%= flash.notice %></p>
+    <p class="flash"><%= flash.notice %></p>
   <% end %>
 
   <% if current_user.employee_info_manage_auth %>
-    <p class="new_employee"><%= link_to '新規追加', new_employee_path, class: 'btn' %></p>
+    <p class="new_employee"><%= link_to '新規追加', new_employee_path, class: 'btn btn-primary btn-lg mt-5' %></p>
   <% end %>
 
-  <table class="employee_table">
+  <table class="employee_table bg-light">
     <thead>
       <tr>
         <th><%= sort_order "number", "社員番号" %></th>
@@ -30,8 +30,8 @@
         <th class="name"><%= "#{employee.last_name} #{employee.first_name}" %></th>
         <th><%= employee.department.name %></th>
         <% if current_user.employee_info_manage_auth %>
-          <th class="btn_th"><%= link_to '編集', edit_employee_path(employee), class: 'btn' %></th>
-          <th class="btn_th"><%= link_to '削除', employee, method: :delete, data: { confirm: "社員「#{employee.first_name} #{employee.last_name}」を削除します。よろしいですか？" }, class: 'btn' %></th>
+          <th class="btn_th"><%= link_to '編集', edit_employee_path(employee), class: 'btn btn-secondary' %></th>
+          <th class="btn_th"><%= link_to '削除', employee, method: :delete, data: { confirm: "社員「#{employee.first_name} #{employee.last_name}」を削除します。よろしいですか？" }, class: 'btn btn-danger' %></th>
         <% end %>
       </tr>
     <% end %>

@@ -61,3 +61,5 @@ gem 'paranoia'
 gem 'acts_as_paranoid'
 
 gem 'kaminari'
+
+gem 'selenium-webdriver'
