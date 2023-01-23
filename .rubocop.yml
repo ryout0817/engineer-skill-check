@@ -20,6 +20,7 @@ AllCops:
     - "config/environments/*"
     - "config/initializers/*"
     - "config/puma.rb"
+    - "spec/spec_helper.rb"
 
 Metrics:
   Enabled: false
