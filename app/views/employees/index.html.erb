@@ -1,3 +1,4 @@
+<%= provide(:title, "社員情報一覧")%>
 <div class="employee_index col-12">
   <% if flash.notice.present? %>
     <p class="flash"><%= flash.notice %></p>
@@ -16,29 +17,29 @@
     </tr>
   </thead>
   <% @employees.each do |employee| %>
-  <tbody>
-    <tr>
-      <% if employee.profiles.active.present? %>
-        <% if employee == current_user %>
-          <th><%= link_to employee.number, edit_employee_profile_path(employee, employee.profiles.active.first) %></th>
-        <% else %>
-          <th><%= link_to employee.number, employee_profile_path(employee, employee.profiles.active.first) %></th>
-        <% end %>
-      <% else %>
-        <th><%= link_to employee.number, employee_profiles_path(employee) %></th>
-      <% end %>
-      <td class="col fw-bolder"><%= "#{employee.last_name} #{employee.first_name}" %></td>
-      <td class="col fw-bolder">
-        <div class="d-flex justify-content-around">
-          <%= employee.department.name %>
-          <% if current_user.employee_info_manage_auth %>
-            <%= link_to '編集', edit_employee_path(employee), class: 'btn btn-secondary btn-sm' %>
-            <%= link_to '削除', employee, method: :delete, data: { confirm: "社員「#{employee.first_name} #{employee.last_name}」を削除します。よろしいですか？" }, class: 'btn btn-danger btn-sm' %>
+    <tbody>
+      <tr>
+        <% if employee.profiles.active.present? %>
+          <% if employee == current_user %>
+            <th><%= link_to employee.number, edit_employee_profile_path(employee, employee.profiles.active.first) %></th>
+          <% else %>
+            <th><%= link_to employee.number, employee_profile_path(employee, employee.profiles.active.first) %></th>
           <% end %>
-        </div>
-      </td>
-    </tr>
-  </tbody>
+        <% else %>
+          <th><%= link_to employee.number, employee_profiles_path(employee) %></th>
+        <% end %>
+        <td class="col fw-bolder"><%= "#{employee.last_name} #{employee.first_name}" %></td>
+        <td class="col fw-bolder">
+          <div class="d-flex justify-content-around">
+            <%= employee.department.name %>
+            <% if current_user.employee_info_manage_auth %>
+              <%= link_to '編集', edit_employee_path(employee), class: 'btn btn-secondary btn-sm' %>
+              <%= link_to '削除', employee, method: :delete, data: { confirm: "社員「#{employee.first_name} #{employee.last_name}」を削除します。よろしいですか？" }, class: 'btn btn-danger btn-sm' %>
+            <% end %>
+          </div>
+        </td>
+      </tr>
+    </tbody>
   <% end %>
 </table>
   <div class="csv-btn text-end mt-5">
@@ -47,4 +48,5 @@
       <span>社員情報を出力する</span>
     <% end %>
   </div>
+  <%= paginate @employees %>
 </div>
