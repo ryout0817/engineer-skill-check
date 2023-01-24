@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_10_20_112406) do
+ActiveRecord::Schema.define(version: 2023_01_13_142718) do
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "content", null: false
+    t.integer "author", null: false
+    t.datetime "deleted_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "departments", force: :cascade do |t|
     t.string "name", null: false
@@ -33,6 +42,7 @@ ActiveRecord::Schema.define(version: 2021_10_20_112406) do
     t.datetime "deleted_at"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.boolean "posting_authority"
     t.index ["department_id"], name: "index_employees_on_department_id"
     t.index ["office_id"], name: "index_employees_on_office_id"
   end

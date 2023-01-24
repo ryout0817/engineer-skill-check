@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :articles, only: [:index, :new, :create, :show, :destroy]
   resources :dashboard, only: :index
   root 'employees#index'
 
