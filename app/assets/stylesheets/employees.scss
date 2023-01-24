@@ -1,7 +1,7 @@
 .employee_index {
   .new_employee {
     text-align: right;
-    margin-right: 31px;
+    margin-right: 250px;
   }
 
   .btn {
@@ -23,6 +23,10 @@
       }
     }
 
+    tr {
+      border: 1px solid;
+    }
+
     .name {
       text-align: left;
       width: 350px;
@@ -41,7 +45,9 @@
 
 .employee_form {
   position: relative;
-  margin-top: 60px;
+  margin-top: 7rem;
+  padding: 1.5rem;
+  box-shadow: 0 0 8px gray;
 
   .form_group {
     display: flex;
@@ -78,10 +84,12 @@
 
   input[type="submit"]{
     position: absolute;
-    top: -38px;
+    top: -60px;
     right: 20px;
-    padding: 0px 22px;
-    background-color: white;
-    border: 1px solid;
+    padding: 5px 22px;
   }
+}
+
+.csv-btn {
+  margin-right: 200px;
 }

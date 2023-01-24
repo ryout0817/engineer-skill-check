@@ -1,24 +1,27 @@
 <div class="container">
   <% if flash.notice.present? %>
-    <p><%= flash.notice %></p>
+    <p class="flash"><%= flash.notice %></p>
   <% end %>
   <div class="col-12 mt-5">
     <% if current_user.news_posting_auth %>
       <%= link_to "新規追加", new_article_path, class: "btn btn-primary my-3 me-3 float-end" %>
     <% end %>
-    <table class="table table-striped">
+    <table class="table bg-white border border-3 table-bordered table-hover">
       <thead class="p-2">
         <tr>
-          <th class="p-3 fs-5" colspan="2"><p>タイトル</p></th>
+          <th class="p-3 fs-5" colspan="2"><p>タイトル <%= link_to "新しい順", articles_path(latest: "true"), class:"sort-bottom" %><%= link_to "古い順", articles_path(old: "true"), class:"sort-bottom" %></p></th>
+          
         </tr>
       </thead>
       <tbody>
         <% @articles.each do |article|%>
           <tr class="col-12">
-            <td class="col-10">
-              <div class="d-flex align-items-center">
+            <td class="col-9">
+              <div class="d-flex align-items-center justify-content-between">
                 <div class="col-8 ms-2">
-                  <%= article.title %>
+                  <%= link_to article_path(article) do %>
+                    <p class="fw-bolder"><%= article.title %></p>
+                  <% end %>
                 </div>
                 <div class="col-4">
                   <p>公開日  <%=l article.created_at, formats: :default %></p>
@@ -27,7 +30,7 @@
             </td>
             <% if current_user.news_posting_auth %>
               <% if current_user.id == article.author %>
-                <td>
+                <td class="col-3">
                   <div class="d-flex justify-content-around">
                     <%= link_to '編集', edit_article_path(article), class: 'btn btn-secondary btn-sm' %>
                     <%= link_to '削除', article_path(article), method: :delete, data: { confirm: "記事を削除します。よろしいですか？" }, class: 'btn btn-danger btn-sm' %>
@@ -39,5 +42,6 @@
         <% end %>
       </tbody>
     </table>
+    <%= paginate @articles %>
   </div>
 </div>

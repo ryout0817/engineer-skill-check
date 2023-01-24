@@ -1,6 +1,6 @@
 <div class="employee_form">
   <% if employee.errors.present? %>
-    <ul>
+    <ul class="flash">
       <% employee.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
@@ -61,6 +61,6 @@
       <%= f.check_box :news_posting_auth, :as => :boolean %>
     </div>
 
-    <%= f.submit '保存' %>
+    <%= f.submit '保存', class:"btn-primary" %>
   <% end %>
 </div>

@@ -3,7 +3,11 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 .session {
-  margin: auto;
+  height: 100%;
+  text-align: center;
+  padding: 5rem;
+  box-shadow: 0 0 8px gray;
+  margin: 5rem auto;
 }
 
 .form-group {
@@ -22,11 +26,11 @@
 
 input[type="text"] {
   width: 300px;
-  height: 22px;
+  height: 35px;
 }
 
 input[type="password"] {
   width: 300px;
-  height: 22px;
+  height: 35px;
 }
 
