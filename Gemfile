@@ -29,10 +29,14 @@ gem 'bootsnap', '>= 1.4.4', require: false
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-  gem 'capybara', '>= 2.15'
   gem 'rspec-rails'
   gem "factory_bot_rails"
   gem 'faker'
+end
+
+group :test do
+  gem 'capybara', '>= 2.15'
+  gem 'selenium-webdriver'
 end
 
 group :development do
@@ -61,5 +65,3 @@ gem 'paranoia'
 gem 'acts_as_paranoid'
 
 gem 'kaminari'
-
-gem 'selenium-webdriver'
