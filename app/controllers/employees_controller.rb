@@ -1,20 +1,28 @@
+require 'csv'
+
 class EmployeesController < ApplicationController
-  before_action :set_employee, only: %i(edit update destroy)
-  before_action :set_form_option, only: %i(new create edit update)
+  before_action :set_employee, only: %i[edit update destroy]
+  before_action :set_form_option, only: %i[new create edit update]
 
   def index
-    @employees = Employee.active.order("#{sort_column} #{sort_direction}")
+    @employees = Employee.active.order("#{sort_column} #{sort_direction}").page(params[:page]).per(15)
+
+    respond_to do |format|
+      format.html
+      format.csv do
+        send_employees_csv(@employees)
+      end
+    end
   end
 
   def new
     @employee = Employee.new
   end
 
+  def edit; end
+
   def create
     @employee = Employee.new(employee_params)
-
-    add_params
-
     if @employee.save
       redirect_to employees_url, notice: "社員「#{@employee.last_name} #{@employee.first_name}」を登録しました。"
     else
@@ -22,12 +30,7 @@ class EmployeesController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
-    add_params
-
     if @employee.update(employee_params)
       redirect_to employees_url, notice: "社員「#{@employee.last_name} #{@employee.first_name}」を更新しました。"
     else
@@ -37,9 +40,9 @@ class EmployeesController < ApplicationController
 
   def destroy
     ActiveRecord::Base.transaction do
-      now = Time.now
-      @employee.update_column(:deleted_at, now)
-      @employee.profiles.active.first.update_column(:deleted_at, now) if @employee.profiles.active.present?
+      now = Time.zone.now
+      @employee.update_column(:deleted_at, now)  # rubocop:disable all
+      @employee.profiles.active.first.update_column(:deleted_at, now) if @employee.profiles.active.present?  # rubocop:disable all
     end
 
     redirect_to employees_url, notice: "社員「#{@employee.last_name} #{@employee.first_name}」を削除しました。"
@@ -48,7 +51,7 @@ class EmployeesController < ApplicationController
   private
 
   def employee_params
-    params.require(:employee).permit(:number, :last_name, :first_name, :account, :password, :department_id, :office_id, :employee_info_manage_auth)
+    params.require(:employee).permit(:number, :last_name, :first_name, :account, :password, :email, :date_of_joining, :department_id, :office_id, :employee_info_manage_auth, :news_posting_auth)
   end
 
   def set_employee
@@ -60,16 +63,6 @@ class EmployeesController < ApplicationController
     @offices = Office.all
   end
 
-  # 現在、メールアドレスと入社日は入力できないため、ここで追加しています。
-  def add_params
-    unless @employee.email
-      @employee.email = 'sample@example.com'
-    end
-    unless @employee.date_of_joining
-      @employee.date_of_joining = Date.today
-    end
-  end
-
   def sort_column
     params[:sort] ? params[:sort] : 'number'
   end
@@ -78,4 +71,15 @@ class EmployeesController < ApplicationController
     params[:direction] ? params[:direction] : 'asc'
   end
 
+  def send_employees_csv(employees)
+    csv_data = CSV.generate do |csv|
+      header = %w[社員番号 氏名 所属]
+      csv << header
+      employees.each do |e|
+        values = [e.id, "#{e.last_name} #{e.first_name}", e.department.name]
+        csv << values
+      end
+    end
+    send_data(csv_data, filename: "employees-information.csv")
+  end
 end
